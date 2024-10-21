@@ -806,7 +806,6 @@ do
                 pcall(setclipboard, table.concat({ math.floor(ColorPicker.Value.R * 255), math.floor(ColorPicker.Value.G * 255), math.floor(ColorPicker.Value.B * 255) }, ', '))
                 Library:Notify('Copied RGB values to clipboard!', 2)
             end)
-
         end
 
         Library:AddToRegistry(PickerFrameInner, { BackgroundColor3 = 'BackgroundColor'; BorderColor3 = 'OutlineColor'; });
@@ -1017,6 +1016,7 @@ do
     end;
 
     function Funcs:AddKeyPicker(Idx, Info)
+        Info.NoUI = Info.NoUI or false
         local ParentObj = self;
         local ToggleLabel = self.TextLabel;
         local Container = self.Container;
