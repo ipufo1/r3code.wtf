@@ -1162,33 +1162,32 @@ do
         end;
 
         function KeyPicker:Update()
-            function KeyPicker:Update()
-                if Info.NoUI then
-                    return;
+            if Info.NoUI then
+                return;
+            end;
+
+            local State = KeyPicker:GetState();
+
+            ContainerLabel.Text = string.format('%s [%s]', Info.Text, KeyPicker.Mode:lower());
+
+            ContainerLabel.Visible = true;
+            ContainerLabel.TextColor3 = State and Library.AccentColor or Library.FontColor;
+
+            Library.RegistryMap[ContainerLabel].Properties.TextColor3 = State and 'AccentColor' or 'FontColor';
+
+            local YSize = 0
+            local XSize = 0
+
+            for _, Label in next, Library.KeybindContainer:GetChildren() do
+                if Label:IsA('TextLabel') and Label.Visible then
+                    YSize = YSize + 18;
+                    if (Label.TextBounds.X > XSize) then
+                        XSize = Label.TextBounds.X
+                    end
                 end;
+            end;
 
-                local State = KeyPicker:GetState();
-
-                ContainerLabel.Text = string.format('%s [%s]', Info.Text, KeyPicker.Mode:lower());
-
-                ContainerLabel.Visible = true;
-                ContainerLabel.TextColor3 = State and Library.AccentColor or Library.FontColor;
-
-                Library.RegistryMap[ContainerLabel].Properties.TextColor3 = State and 'AccentColor' or 'FontColor';
-
-                local YSize = 0
-                local XSize = 0
-
-                for _, Label in next, Library.KeybindContainer:GetChildren() do
-                    if Label:IsA('TextLabel') and Label.Visible then
-                        YSize = YSize + 18;
-                        if (Label.TextBounds.X > XSize) then
-                            XSize = Label.TextBounds.X
-                        end
-                    end;
-                end;
-
-                Library.KeybindFrame.Size = UDim2.new(0, math.max(XSize + 10, 210), 0, YSize + 23)
+            Library.KeybindFrame.Size = UDim2.new(0, math.max(XSize + 10, 210), 0, YSize + 23)
         end;
 
         function KeyPicker:GetState()
