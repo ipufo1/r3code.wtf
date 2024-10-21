@@ -2186,7 +2186,7 @@ do
         local Dropdown = {
             Values = Info.Values;
             Value = Info.Multi and {};
-            Multi = Info.Multi;
+            Multi = Info.Multi or false;
             Type = 'Dropdown';
             SpecialType = Info.SpecialType; -- can be either 'Player' or 'Team'
             Callback = Info.Callback or function(Value) end;
